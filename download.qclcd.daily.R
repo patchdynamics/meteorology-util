@@ -18,8 +18,8 @@ downloadload.qclcd.daily = function(start.year, end.year, wbans=NULL) {
       temp <- tempfile()
       date.string = paste0(year, sprintf('%.2i', month))
       url = str_replace(url.base,'YYYYMM', date.string)
-      download.file(url,temp)
       filename = paste0(date.string, 'daily.txt')
+			download.file(url,temp)
       if(type == 'old'){
         untar(temp, file=filename)
         data.month = read.csv(filename)
@@ -31,7 +31,8 @@ downloadload.qclcd.daily = function(start.year, end.year, wbans=NULL) {
           'Tavg' = data.month$Avg.Temp,
           'DewPoint' = data.month$Avg.Dew.Pt,
           'WetBulb' = data.month$Avg.Wet.Bulb,
-          'AvgSpeed' = data.month$Wind.Avg.Speed)
+          'AvgSpeed' = data.month$Wind.Avg.Speed,
+          'WindDirection' = data.month$Wind.Direction)
       } else {
         data.month = read.csv(unz(temp, filename))
         data.month = data.frame(
@@ -42,7 +43,8 @@ downloadload.qclcd.daily = function(start.year, end.year, wbans=NULL) {
           'Tavg' = data.month$Tavg,
           'DewPoint' = data.month$DewPoint,
           'WetBulb' = data.month$WetBulb,
-          'AvgSpeed' = data.month$AvgSpeed)
+          'AvgSpeed' = data.month$AvgSpeed,
+          'WindDirection' = data.month$Max2Dir)
       }
       unlink(temp)
       data.year = rbind(data.year, data.month)
@@ -59,5 +61,7 @@ downloadload.qclcd.daily = function(start.year, end.year, wbans=NULL) {
 #data.2014 = downloadload.qclcd.daily('2014', '2014', wbans=c(24149, 24243))
 #data.2004 = downloadload.qclcd.daily('2004', '2004', wbans=c(24149, 24243))
 #data.2007 = downloadload.qclcd.daily('2007', '2007', wbans=c(24149, 24243))
-qclcd.2005.2015 = downloadload.qclcd.daily('2005', '2015', wbans=c(24149, 24243))
+#qclcd.2005.2015 = downloadload.qclcd.daily('2005', '2015', wbans=c(24149, 24243))
 
+#d = read.csv('201401daily.txt')
+#names(d)
