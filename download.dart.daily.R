@@ -21,6 +21,9 @@ download.dart.daily = function(project, first.year, last.year){
   }
   ts.all$Temperature..C. = na.approx(ts.all$Temperature..C., na.rm=FALSE)
   ts.all$Outflow..kcfs. = na.approx(ts.all$Outflow..kcfs., na.rm=FALSE)
+  ts.all$Outflow..kcfs. = na.approx(ts.all$Outflow..kcfs., na.rm=FALSE)
+  ts.all$Spill..kcfs.. = na.approx(ts.all$Spill..kcfs., na.rm=FALSE)
+  ts.all$Spill.Percent.... = na.approx(ts.all$Spill.Percent...., na.rm=FALSE)
   return(ts.all)
 }
 
